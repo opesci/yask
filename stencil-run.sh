@@ -23,6 +23,7 @@
 ## IN THE SOFTWARE.
 ##############################################################################
 
-echo "$0 has been replaced with bin/yask.sh."
-echo "yask.sh requires an additional '-stencil <stencil>' argument."
-exit 1
+make clean
+python $DEVITO_HOME/examples/acoustic/acoustic_example.py
+make -j --new-file=bin/foldBuilder.exe --old-file=src/stencil_code.hpp stencil=test arch=hsw # this builds the kernel without using the foldbuilder
+bin/yask.sh -stencil test -arch hsw -v # this runs the kernel (-v is the quick-validation option)
