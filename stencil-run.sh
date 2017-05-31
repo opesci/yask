@@ -24,6 +24,5 @@
 ##############################################################################
 
 make clean
-python $DEVITO_HOME/examples/acoustic/acoustic_example.py
-make -j --new-file=bin/foldBuilder.exe --old-file=src/stencil_code.hpp stencil=test arch=hsw # this builds the kernel without using the foldbuilder
-bin/yask.sh -stencil test -arch hsw -v # this runs the kernel (-v is the quick-validation option)
+make -j stencil=devito-test-solution arch=hsw yk-api # this builds the kernel without using the foldbuilder
+#bin/yask.sh -stencil test -arch hsw -v # this runs the kernel (-v is the quick-validation option)
