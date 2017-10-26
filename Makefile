@@ -99,7 +99,7 @@ else
   SO_SUFFIX	:=	.so
   RUN_PREFIX	:=
   PYTHON		:=	python
-  CXX_PREFIX	:=	time
+  # CXX_PREFIX	:=	time
 endif
 
 # Misc dirs & files.
