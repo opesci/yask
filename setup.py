@@ -1,11 +1,18 @@
 import subprocess
 import sys
 
-from setuptools import setup, find_packages
-from setuptools.command.install import install
+from setuptools import setup, Command
 
-class Install(install):
-    """Customized setuptools install command - builds protos on install."""
+class CustomInstall(Command):
+
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
     def run(self):
         protoc_command = ['make', 'compiler']
         if subprocess.call(protoc_command) != 0:
@@ -15,7 +22,6 @@ class Install(install):
         if subprocess.call(protoc_command) != 0:
             sys.exit(-1)
 
-        install.run(self)
 
 setup(
     name='yask',
@@ -28,6 +34,6 @@ setup(
     license='MIT',
     packages = ['yask'],
     cmdclass={
-        'install': Install,
+        'build_ext': CustomInstall,
     }
 )
