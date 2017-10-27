@@ -550,21 +550,21 @@ $(YK_GEN_DIR)/yask_gen_loops.hpp: $(GEN_LOOPS) $(YK_DIMS_FILE)
 
 $(YK_GEN_DIR)/yask_layout_macros.hpp: $(GEN_LAYOUTS)
 	$(YK_MK_GEN_DIR)
-	$< -m $(max_dims) > $@
+	perl $< -m $(max_dims) > $@
 	@- gindent -fca $@ || \
 	  indent -fca $@ ||   \
 	  echo "note:" $@ "is not properly indented because indent program failed or was not found."
 
 $(YK_GEN_DIR)/yask_layouts.hpp: $(GEN_LAYOUTS)
 	$(YK_MK_GEN_DIR)
-	$< -d $(max_dims) > $@
+	perl $< -d $(max_dims) > $@
 	@- gindent -fca $@ || \
 	  indent -fca $@ ||   \
 	  echo "note:" $@ "is not properly indented because indent program failed or was not found."
 
 $(YK_GEN_DIR)/yask_grid_code.hpp: $(GEN_LAYOUTS)
 	$(YK_MK_GEN_DIR)
-	$< -g $(max_dims) > $@
+	perl $< -g $(max_dims) > $@
 
 # Extract the number of stencil dims from the compiler output.
 # Use this to create an option to pass to the loop generator script.
