@@ -192,6 +192,9 @@ namespace yask {
         STATE_VARS(this);
         run_time.start();
 
+        // Start vtune collection.
+        VTUNE_RESUME;
+
         // Determine step dir from order of first/last.
         idx_t step_dir = (last_step_index >= first_step_index) ? 1 : -1;
         
@@ -319,6 +322,9 @@ namespace yask {
             rank_idxs.stop[step_posn] = stop_t;
             rank_idxs.step[step_posn] = step_t;
 
+            // Start timer for auto-tuner.
+            _at.timer.start();
+            
             // If no wave-fronts (default), loop through packs here, and do
             // only one pack at a time in calc_region(). This is similar to
             // loop in calc_rank_ref(), but with packs instead of bundles.
@@ -550,7 +556,12 @@ namespace yask {
             cache_model.disable();
         }
 #endif
+
+        // Stop vtune collection.
+        VTUNE_PAUSE;
+
         run_time.stop();
+
     } // run_solution().
 
     // Calculate results within a region.  Each region is typically computed
